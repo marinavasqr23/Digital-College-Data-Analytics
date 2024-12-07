@@ -1,0 +1,49 @@
+# Guia para Configurar PostgreSQL e Criar um Banco de Dados
+
+## **Link para Download**
+[PostgreSQL 16 Documentation](https://www.postgresql.org/docs/16/)
+
+---
+
+## **Adicionar um Servidor no pgAdmin**
+### **Passos:**
+1. **Abrir o pgAdmin:** Inicie o programa.
+2. **Criar um novo servidor:**
+   - No painel esquerdo, clique com o botão direito em **Servers > Create > Server**.
+3. **Configurar o servidor:**
+   - **Aba General:** Insira um nome amigável para o servidor (ex.: "Servidor Local").
+   - **Aba Connection:**
+     - **Host:** `localhost` (ou IP do servidor remoto).
+     - **Port:** Padrão `5432`.
+     - **Maintenance Database:** Geralmente `postgres`.
+     - **Username:** Usuário do banco.
+     - **Password:** Senha do usuário.
+4. **Salvar:** O servidor será exibido no painel esquerdo.
+
+---
+
+## **COMANDOS SQL**
+
+-- Criando Banco de Dados
+CREATE DATABASE nome_do_banco; 
+
+-- Criando Tabelas no Banco de Dados
+CREATE TABLE nome_do_banco (
+  id INTEGER,
+  nome VARCHAR(100),
+  .
+  .
+  .
+);
+
+-- Visualizando a tabela toda
+SELECT * FROM nome_tabela
+LIMIT 20; -- Limitando o SELECT para 20 linhas da tabela
+
+-- Inserindo dados na Tabela
+INSERT INTO nome_tabela VALUES (1, 'Maria'), (2, 'Pedro').....
+
+-- Atualizando um registro na tabela
+UPDATE nome_tabela
+SET nome = 'Paulo'
+WHERE id = 2; 
