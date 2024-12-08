@@ -1,0 +1,19 @@
+----------- Inserindo dados na Tabela 'autor' --------------------------------
+
+INSERT INTO autor (nome_autor, data_nasc) VALUES
+('J.K. Rowling', '1965-07-31'),
+('Agatha Christie', '1890-09-15'),
+('Stephen King', '1947-09-21'),
+('George Orwell', '1903-06-25'),
+('J.R.R. Tolkien', '1892-01-03'),
+('Arthur Conan Doyle', '1859-05-22'),
+('Jane Austen', '1775-12-16'),
+('Leo Tolstoy', '1828-09-09'),
+('Mark Twain', '1835-11-30'),
+('Isaac Asimov', '1920-01-02'),
+('Harper Lee', '1926-04-28'),
+('Ernest Hemingway', '1899-07-21'),
+('Gabriel García Márquez', '1927-03-06'),
+('F. Scott Fitzgerald', '1896-09-24'),
+('Charles Dickens', '1812-02-07');
+
