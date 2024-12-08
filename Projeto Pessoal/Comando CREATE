@@ -3,11 +3,10 @@ CREATE TABLE livros (
     nome VARCHAR (100),
     ano_lancamento INTEGER,
     num_pag INTEGER,
-    autor VARCHAR (100),
     ano_leitura INTEGER,
     sinopse TEXT,
     id_genero INTEGER,
-	id_autor INTEGER,
+    id_autor INTEGER,
     CONSTRAINT fk_genero FOREIGN KEY (id_genero) REFERENCES genero (id_genero),
 	CONSTRAINT fk_autor FOREIGN KEY (id_autor) REFERENCES autor (id_autor)
 );
