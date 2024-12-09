@@ -1,0 +1,11 @@
+----- Atualizando os ids dos autores --------
+UPDATE livros SET id_autor = 16 WHERE nome = 'Frankenstein';
+UPDATE livros SET id_autor = 17 WHERE nome = 'Uma Vida Pequena';
+UPDATE livros SET id_autor = 18 WHERE nome = 'O Peso do Pássaro Morto';
+UPDATE livros SET id_autor = 19 WHERE nome = 'Tudo é Rio';
+UPDATE livros SET id_autor = 19 WHERE nome = 'Véspera';
+UPDATE livros SET id_autor = 20 WHERE nome = 'O Segredo da Empregada';
+UPDATE livros SET id_autor = 21 WHERE nome = 'Pachinko';
+UPDATE livros SET id_autor = 22 WHERE nome = 'A Verdade Sobre o Caso Harry Quebert';
+UPDATE livros SET id_autor = 23 WHERE nome = 'Holocausto Brasileiro';
+UPDATE livros SET id_autor = 24 WHERE nome = 'O Impulso';
