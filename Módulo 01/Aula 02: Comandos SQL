@@ -1,0 +1,24 @@
+------- Divisões da Linguagem SQL -------
+
+DDL (Linguagem Definição de Dados)
+# CREATE
+# ALTER
+# TRUNCATE
+# DROP
+# DESC/DESCRIBE
+# RENAME
+
+DML (Linguagem Manipulação de Dados)
+# INSERT
+# UPDATE
+# DELETE
+# SELECT
+
+DCL (Linguagem Controle de Dados)
+# GRANT
+# REVOKE
+
+TCL (Transação de Controle da Linguagem) 
+# SAVEPOINT
+# ROLLBACK
+# COMMIT
