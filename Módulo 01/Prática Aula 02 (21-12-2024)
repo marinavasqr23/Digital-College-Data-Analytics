@@ -1,0 +1,112 @@
+-- AULA 02: Dia 21/12/2024
+
+-- Criando banco de dados:
+
+CREATE DATABASE digital;
+
+-- Criando Schema 
+CREATE SCHEMA rh;
+
+-- Criando tabela PESSOA -------------------------------------
+CREATE TABLE IF NOT EXISTS rh.pessoa -- rh. é o schema que queremos adicionar a tabela
+(
+	id SERIAL, -- pode coloca PRIMARY KEY do lado e excluir a linha do CONSTRAINT
+	nome CHARACTER VARYING, -- CHARACTER VARYING OU VARCHAR(quantid caracteres)
+	cpf CHARACTER VARYING,
+	email CHARACTER VARYING,
+	nascimento DATE,
+	renda NUMERIC (18,2), -- 16 antes da virgula e 2 depois da virgula
+	casa_propria BOOLEAN,
+	CONSTRAINT pessoa_pkey PRIMARY KEY (id) -- Ideal para da o nome que você quiser para a chave primária
+);
+
+-- Inserindo dados na tabela rh.pessoa
+INSERT INTO rh.pessoa (nome, cpf, email, nascimento, renda, casa_propria) 
+VALUES ('Pedro', '01234567890', 'pedro@digital.com.br', '1990-01-01', 2450.75, true);
+
+-- Visualizando os dados inseridos
+SELECT * FROM rh.pessoa;
+
+
+
+
+
+
+-- Criando tabela ESTADO -------------------------------------
+CREATE TABLE IF NOT EXISTS rh.estado
+(
+id SERIAL NOT NULL,
+nome CHARACTER VARYING,
+sigla CHAR(2),
+CONSTRAINT estado_key PRIMARY KEY(id)
+);
+
+-- Inserindo dados na tabela rh.estado
+INSERT INTO rh.estado (nome, sigla) VALUES
+('Acre', 'AC'),
+('Alagoas', 'AL'),
+('Amapá', 'AP'),
+('Amazonas', 'AM'),
+('Bahia', 'BA'),
+('Ceará', 'CE'),
+('Distrito Federal', 'DF'),
+('Espírito Santo', 'ES'),
+('Goiás', 'GO'),
+('Maranhão', 'MA'),
+('Mato Grosso', 'MT'),
+('Mato Grosso do Sul', 'MS'),
+('Minas Gerais', 'MG'),
+('Pará', 'PA'),
+('Paraíba', 'PB'),
+('Paraná', 'PR'),
+('Pernambuco', 'PE'),
+('Piauí', 'PI'),
+('Rio de Janeiro', 'RJ'),
+('Rio Grande do Norte', 'RN'),
+('Rio Grande do Sul', 'RS'),
+('Rondônia', 'RO'),
+('Roraima', 'RR'),
+('Santa Catarina', 'SC'),
+('São Paulo', 'SP'),
+('Sergipe', 'SE'),
+('Tocantins', 'TO');
+
+-- Visualizando os dados inseridos
+SELECT * FROM rh.estado;
+
+
+
+
+-- Criando tabela REGIÃO -------------------------------------
+CREATE TABLE public.regiao
+(
+	id SERIAL NOT NULL,
+	nome CHARACTER VARYING,
+	CONSTRAINT regiao_pk PRIMARY KEY (id)
+);
+
+-- Inserindo dados em public.regiao
+INSERT INTO public.regiao (nome) VALUES
+('Norte'),
+('Sul'),
+('Nordeste'),
+('Sudeste'),
+('Centro-Oeste');
+
+-- Visualizando os dados inseridos
+SELECT * FROM public.regiao;
+
+
+
+
+--- Criando tabela DEPARTAMENTO -------------------------------------
+CREATE TABLE public.departamento
+(
+	id SERIAL NOT NULL,
+	nome CHARACTER VARYING,
+	id_regiao INTEGER,
+	CONSTRAINT departamento_pk PRIMARY KEY (id),
+	CONSTRAINT departamento_id_regiao_pk FOREIGN KEY (id_regiao)
+		REFERENCES public.regiao (id)
+);
+
