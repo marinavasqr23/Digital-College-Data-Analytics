@@ -12,7 +12,11 @@ DROP TABLE alunos;
 -- TRUNCATE: Remove todos os dados de uma tabela, mas mantém a estrutura.
 TRUNCATE TABLE alunos;
 
+-- RENAME: Renomeia algum dado da Tabela.
+
+-- DESC/DESCRIBE: Descrever a tabela.
 -----------------------------------------------------------------------------------------------------------------------------------------
+
 ## Comandos DML (Manipulação de Dados)
 
 -- SELECT: Recupera dados de uma tabela.
