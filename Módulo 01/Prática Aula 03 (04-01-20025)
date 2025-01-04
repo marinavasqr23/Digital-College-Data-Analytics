@@ -1,0 +1,6 @@
+INSERT INTO public.departamento VALUES
+(10,'Vendas',1),
+(20,'Operações',1),
+(30,'Administrativo',2),
+(40,'Financeiro',3);
+
