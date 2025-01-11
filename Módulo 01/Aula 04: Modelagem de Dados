@@ -1,0 +1,18 @@
+# MODELO CONCEITUAL
+Etapas para criar um modelo conceitual:
+- Identificar os tipos de entidade;
+- Identificar atributos;
+- Aplicar convenção de nomes;
+- Identificar relacionamentos;
+- Associar chaves;
+- Normalizar para reduzir a redundância dos dados;
+- Diversificar para melhorar o desempenho.
+
+# NORMALIZAÇÃO
+1. Primeira Forma Normal (1FN): A primeira forma normal visa eliminar atributos multivalorados e atributos compostos.
+
+2. Segunda Forma Normal (2FN): Uma tabela encontra-se na segunda forma normal se ela atende todos os requisitos da primeira forma normal e 
+se os registros na tabela, que não são chaves, dependam da chave primária em sua totalidade e não apenas parte dela.
+
+3. Terceira Forma Normal (3FN): Se uma tabela está na primeira e segunda forma normal, mas ao analisarmos um registro encontramos um 
+atributo não chave dependente de outro atributo não chave, precisaremos corrigir a tabela para a terceira forma normal.
