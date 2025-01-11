@@ -16,3 +16,13 @@ se os registros na tabela, que não são chaves, dependam da chave primária em 
 
 3. Terceira Forma Normal (3FN): Se uma tabela está na primeira e segunda forma normal, mas ao analisarmos um registro encontramos um 
 atributo não chave dependente de outro atributo não chave, precisaremos corrigir a tabela para a terceira forma normal.
+
+
+# Modelagem de Dados
+Entidade (Conceitual) = Tabela (Lógica)
+Atributo (Conceitual) = Campos (Lógica)
+Instância (Conceitual) = Linha ou Tupla (Lógica)
+
+
+
+
