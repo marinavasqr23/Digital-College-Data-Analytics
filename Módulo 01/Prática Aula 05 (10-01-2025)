@@ -1,0 +1,250 @@
+CREATE TABLE aula04.Pessoa 
+(
+	id 	INT NOT NULL,
+	id_genero INT NOT NULL,
+	matricula CHAR(8) NOT NULL,
+	data_emissao DATE NOT NULL,
+	data_demissional DATE,
+	CONSTRAINT pessoa_pkey PRIMARY KEY (id),
+	CONSTRAINT id_genero_fkey FOREIGN KEY (id_genero) REFERENCES aula04.Genero(id)
+
+);
+
+
+
+CREATE TABLE aula04.Genero
+(
+	id INT NOT NULL,
+	nome VARCHAR(10) NOT NULL,
+	CONSTRAINT genero_pkey PRIMARY KEY (id)
+);
+
+INSERT INTO aula04.Genero (id,nome) VALUES 
+(1, 'Feminino'),
+(2,'Masculino'),
+(3,'Outro');
+
+SELECT * FROM aula04.genero
+
+
+CREATE TABLE aula04.Cargo 
+(
+	id INT NOT NULL,
+	nome VARCHAR (100) NOT NULL,
+	CONSTRAINT cargo_pkey PRIMARY KEY (id)
+);
+
+
+
+CREATE TABLE aula04.Setor 
+(
+	id INT NOT NULL,
+	nome VARCHAR (100) NOT NULL,
+	CONSTRAINT setor_pkey PRIMARY KEY (id)
+);
+
+INSERT INTO aula04.Setor (id, nome) VALUES
+(1, 'Tecnologia da Informação'),
+(2, 'Recursos Humanos'),
+(3, 'Financeiro'),
+(4, 'Marketing'),
+(5, 'Operações'),
+(6, 'Vendas'),
+(7, 'Logística'),
+(8, 'Pesquisa e Desenvolvimento'),
+(9, 'Produção'),
+(10, 'Suporte ao Cliente');
+
+SELECT * FROM aula04.Setor
+
+
+CREATE TABLE aula04.Lotacao
+(
+	id INT NOT NULL,
+	id_pessoa INT NOT NULL,
+	id_setor INT NOT NULL,
+	id_cargo INT NOT NULL,
+	CONSTRAINT lotacao_pkey PRIMARY KEY (id),
+	CONSTRAINT id_pessoa_fkey FOREIGN KEY (id_pessoa) REFERENCES aula04.Pessoa (id),
+	CONSTRAINT id_setor_fkey FOREIGN KEY (id_setor) REFERENCES aula04.Setor (id),
+	CONSTRAINT id_cargo_fkey FOREIGN KEY (id_cargo) REFERENCES aula04.Cargo (id)
+);
+
+
+CREATE TABLE aula04.TipoContrato
+(
+	id INT NOT NULL,
+	nome VARCHAR (50) NOT NULL,
+	CONSTRAINT tipocontrato_pkey PRIMARY KEY (id)
+);
+
+
+
+
+CREATE TABLE aula04.TipoContratoPessoa
+(
+	id INT NOT NULL,
+	id_tipo_contato INT NOT NULL,
+	id_pessoa INT NOT NULL,
+	valor VARCHAR (100) NOT NULL,
+	CONSTRAINT id_tipo_contrato_pessoa PRIMARY KEY (id),
+	FOREIGN KEY (id_tipo_contato) REFERENCES aula04.TipoContrato (id),
+	FOREIGN KEY (id_pessoa) REFERENCES aula04.Pessoa (id)
+);
+
+
+
+
+
+
+
+CREATE TABLE aula04.HistoricoSalarial 
+(
+    id INT NOT NULL,
+    id_pessoa INT NOT NULL,
+    carga_horaria INT NOT NULL,
+    salario DECIMAL(18,2) NOT NULL,
+    data_cadastro DATE NOT NULL,
+    CONSTRAINT pk_historico_salario PRIMARY KEY (id),
+    CONSTRAINT fk_historico_pessoa FOREIGN KEY (id_pessoa) REFERENCES aula04.Pessoa (id)
+);
+
+
+
+
+
+CREATE TABLE aula04.Endereco
+(
+	id INT NOT NULL,
+	id_bairro INT NOT NULL,
+	id_pessoa INT NOT NULL,
+	logradouro VARCHAR (50) NOT NULL,
+	cep VARCHAR (100) NOT NULL,
+	numero INT NOT NULL,
+	CONSTRAINT pk_endereco PRIMARY KEY (id),
+    CONSTRAINT fk_bairro_endereco FOREIGN KEY (id_bairro) REFERENCES aula04.Bairro (id),
+	CONSTRAINT fk_pessoa_endereco FOREIGN KEY (id_pessoa) REFERENCES aula04.Pessoa (id)
+);
+
+
+
+
+
+
+CREATE TABLE aula04.Bairro
+(
+	id INT NOT NULL,
+	id_cidade INT NOT NULL,
+	nome VARCHAR (100) NOT NULL,
+	CONSTRAINT bairro_pk PRIMARY KEY (id),
+	CONSTRAINT fk_cidade_bairro FOREIGN KEY (id_cidade) REFERENCES aula04.Cidade (id)
+);
+
+
+
+
+
+CREATE TABLE aula04.Cidade
+(
+	id INT NOT NULL,
+	id_estado INT NOT NULL,
+	nome VARCHAR (100) NOT NULL,
+	CONSTRAINT pk_cidade PRIMARY KEY (id),
+	CONSTRAINT fk_estado_cidade FOREIGN KEY (id_estado) REFERENCES aula04.Estado (id)
+);
+
+INSERT INTO aula04.Cidade (id, id_estado, nome) VALUES
+(1, 1, 'Rio Branco'), -- Acre
+(2, 2, 'Maceió'), -- Alagoas
+(3, 3, 'Macapá'), -- Amapá
+(4, 4, 'Manaus'), -- Amazonas
+(5, 5, 'Salvador'), -- Bahia
+(6, 6, 'Fortaleza'), -- Ceará
+(7, 7, 'Brasília'), -- Distrito Federal
+(8, 8, 'Vitória'), -- Espírito Santo
+(9, 9, 'Goiânia'), -- Goiás
+(10, 10, 'São Luís'), -- Maranhão
+(11, 11, 'Cuiabá'), -- Mato Grosso
+(12, 12, 'Campo Grande'), -- Mato Grosso do Sul
+(13, 13, 'Belo Horizonte'), -- Minas Gerais
+(14, 14, 'Belém'), -- Pará
+(15, 15, 'João Pessoa'), -- Paraíba
+(16, 16, 'Curitiba'), -- Paraná
+(17, 17, 'Recife'), -- Pernambuco
+(18, 18, 'Teresina'), -- Piauí
+(19, 19, 'Rio de Janeiro'), -- Rio de Janeiro
+(20, 20, 'Natal'), -- Rio Grande do Norte
+(21, 21, 'Porto Alegre'), -- Rio Grande do Sul
+(22, 22, 'Porto Velho'), -- Rondônia
+(23, 23, 'Boa Vista'), -- Roraima
+(24, 24, 'Florianópolis'), -- Santa Catarina
+(25, 25, 'São Paulo'), -- São Paulo
+(26, 26, 'Aracaju'), -- Sergipe
+(27, 27, 'Palmas'); 
+
+SELECT * FROM aula04.Cidade
+
+
+CREATE TABLE aula04.Estado
+(
+	id INT NOT NULL,
+	nome VARCHAR (100) NOT NULL,
+	sigla CHAR(2) NOT NULL,
+	CONSTRAINT pk_bairro PRIMARY KEY (id)
+);
+
+
+
+CREATE TABLE aula04.Estado
+(
+	id INT NOT NULL,
+	nome VARCHAR (100) NOT NULL,
+	sigla CHAR(2) NOT NULL,
+	CONSTRAINT pk_bairro PRIMARY KEY (id)
+);
+
+INSERT INTO aula04.Estado (id, nome, sigla) VALUES
+(1, 'Acre', 'AC'),
+(2, 'Alagoas', 'AL'),
+(3, 'Amapá', 'AP'),
+(4, 'Amazonas', 'AM'),
+(5, 'Bahia', 'BA'),
+(6, 'Ceará', 'CE'),
+(7, 'Distrito Federal', 'DF'),
+(8, 'Espírito Santo', 'ES'),
+(9, 'Goiás', 'GO'),
+(10, 'Maranhão', 'MA'),
+(11, 'Mato Grosso', 'MT'),
+(12, 'Mato Grosso do Sul', 'MS'),
+(13, 'Minas Gerais', 'MG'),
+(14, 'Pará', 'PA'),
+(15, 'Paraíba', 'PB'),
+(16, 'Paraná', 'PR'),
+(17, 'Pernambuco', 'PE'),
+(18, 'Piauí', 'PI'),
+(19, 'Rio de Janeiro', 'RJ'),
+(20, 'Rio Grande do Norte', 'RN'),
+(21, 'Rio Grande do Sul', 'RS'),
+(22, 'Rondônia', 'RO'),
+(23, 'Roraima', 'RR'),
+(24, 'Santa Catarina', 'SC'),
+(25, 'São Paulo', 'SP'),
+(26, 'Sergipe', 'SE'),
+(27, 'Tocantins', 'TO');
+
+SELECT * FROM aula04.Estado
+
+
+CREATE TABLE aula04.Cargo 
+(
+	id INT NOT NULL,
+	nome VARCHAR (100) NOT NULL,
+	CONSTRAINT cargo_pkey PRIMARY KEY (id)
+);
+
+
+
+
+
+
+
