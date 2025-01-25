@@ -1,0 +1,13 @@
+# Primeira Forma Normal 
+
+- Sem campos Multivalorados (Ex: Telefone) ou Compostos (Ex: Endereço)
+
+# Segunda Forma Normal
+
+- Está na Primeira Forma Normal e seus registros não chaves dependem de alguma das chaves.
+- Se for preciso quebrar, caso mais de um registro chave, mantem uma tabela com registros não chaves que dependem da todos os registros chaves.
+
+# Terceira Formal Normal
+
+- Está na Segunda Forma Normal e que os atributos que não são chave devem ser independentes entre 
+si e dependentes única e exclusivamente da chave primária da tabela.
