@@ -1,3 +1,45 @@
+CREATE TABLE vendas_desmoralizado (
+    id_venda SERIAL PRIMARY KEY,
+    id_cliente INT,
+    nome_cliente VARCHAR(100),
+    telefone_cliente VARCHAR(15),
+    email_cliente VARCHAR(100),
+    endereco_cliente VARCHAR(255),
+    id_produto INT,
+    nome_produto VARCHAR(100),
+    categoria_produto VARCHAR(50),
+    valor_unitario NUMERIC(10, 2),
+    quantidade INT,
+    valor_total NUMERIC(10, 2),
+    data_venda DATE,
+    id_vendedor INT,
+    nome_vendedor VARCHAR(100),
+    departamento_vendedor VARCHAR(50),
+    telefone_vendedor VARCHAR(15)
+);
+
+-- Inserir Dados na Tabela
+INSERT INTO vendas_desmoralizado (id_cliente, nome_cliente, telefone_cliente, email_cliente, endereco_cliente, id_produto, nome_produto, categoria_produto, valor_unitario, quantidade, valor_total, data_venda, id_vendedor, nome_vendedor, departamento_vendedor, telefone_vendedor) VALUES
+(1, 'João Silva', '85999999999', 'joao@gmail.com', 'Rua A, 123', 1, 'Notebook', 'Eletrônicos', 3500.00, 1, 3500.00, '2025-01-15', 1, 'Carlos Lima', 'Vendas', '85977777777'),
+(2, 'Maria Santos', '11999999999', 'maria@hotmail.com', 'Av. B, 456', 2, 'Geladeira', 'Eletrodomésticos', 2800.00, 1, 2800.00, '2025-01-10', 2, 'Fernanda Costa', 'Eletrodomésticos', '41955555555'),
+(3, 'Ana Souza', '21988888888', 'ana@outlook.com', 'Rua C, 789', 3, 'Smartphone', 'Eletrônicos', 1500.00, 2, 3000.00, '2025-01-12', 3, 'Paula Oliveira', 'Eletrônicos', '31966666666'),
+(4, 'Carlos Lima', '85988888888', 'carlos@gmail.com', 'Av. D, 321', 4, 'Televisão', 'Eletrônicos', 2500.00, 1, 2500.00, '2025-01-11', 2, 'Fernanda Costa', 'Eletrodomésticos', '41955555555'),
+(5, 'Paula Oliveira', '31966666666', 'paula@yahoo.com', 'Rua E, 654', 5, 'Fogão', 'Eletrodomésticos', 1200.00, 2, 2400.00, '2025-01-09', 1, 'Carlos Lima', 'Vendas', '85977777777'),
+(6, 'Fernanda Costa', '41955555555', 'fernanda@gmail.com', 'Rua F, 987', 1, 'Notebook', 'Eletrônicos', 3200.00, 1, 3200.00, '2025-01-15', 3, 'Paula Oliveira', 'Eletrônicos', '31966666666'),
+(1, 'João Silva', '85999999999', 'joao@gmail.com', 'Rua A, 123', 6, 'Impressora', 'Eletrônicos', 600.00, 3, 1800.00, '2025-01-16', 4, 'Ana Souza', 'Eletrônicos', '21988888888'),
+(2, 'Maria Santos', '11999999999', 'maria@hotmail.com', 'Av. B, 456', 7, 'Liquidificador', 'Eletrodomésticos', 200.00, 4, 800.00, '2025-01-17', 5, 'Paula Oliveira', 'Eletrodomésticos', '31966666666'),
+(4, 'Carlos Lima', '85988888888', 'carlos@gmail.com', 'Av. D, 321', 8, 'Fone de Ouvido', 'Eletrônicos', 150.00, 5, 750.00, '2025-01-18', 1, 'Carlos Lima', 'Vendas', '85977777777'),
+(3, 'Ana Souza', '21988888888', 'ana@outlook.com', 'Rua C, 789', 9, 'Tablet', 'Eletrônicos', 900.00, 1, 900.00, '2025-01-14', 2, 'Fernanda Costa', 'Eletrodomésticos', '41955555555'),
+(6, 'Fernanda Costa', '41955555555', 'fernanda@gmail.com', 'Rua F, 987', 10, 'Cafeteira', 'Eletrodomésticos', 400.00, 2, 800.00, '2025-01-13', 4, 'Ana Souza', 'Eletrônicos', '21988888888'),
+(5, 'Paula Oliveira', '31966666666', 'paula@yahoo.com', 'Rua E, 654', 11, 'Máquina de Lavar', 'Eletrodomésticos', 2200.00, 1, 2200.00, '2025-01-15', 3, 'Paula Oliveira', 'Eletrônicos', '31966666666'),
+(1, 'João Silva', '85999999999', 'joao@gmail.com', 'Rua A, 123', 12, 'Ar-Condicionado', 'Eletrodomésticos', 1500.00, 2, 3000.00, '2025-01-14', 5, 'Paula Oliveira', 'Eletrodomésticos', '31966666666'),
+(4, 'Carlos Lima', '85988888888', 'carlos@gmail.com', 'Av. D, 321', 13, 'Drone', 'Eletrônicos', 3500.00, 1, 3500.00, '2025-01-10', 2, 'Fernanda Costa', 'Eletrodomésticos', '41955555555'),
+(2, 'Maria Santos', '11999999999', 'maria@hotmail.com', 'Av. B, 456', 14, 'Microondas', 'Eletrodomésticos', 800.00, 1, 800.00, '2025-01-13', 1, 'Carlos Lima', 'Vendas', '85977777777');
+
+
+
+---- NORMALIZANDO A TABELA -------------------------------------------------------------------------
+
 -- Tabelas principais
 CREATE TABLE pratica06.Departamento (
   id SERIAL PRIMARY KEY,
