@@ -1,0 +1,245 @@
+-- Tabelas principais
+CREATE TABLE pratica06.Departamento (
+  id SERIAL PRIMARY KEY,
+  nome VARCHAR(100) NOT NULL
+);
+
+INSERT INTO pratica06.Departamento (nome) VALUES
+('Vendas'),
+('Eletrodomésticos'),
+('Eletrônicos');
+
+SELECT * FROM pratica06.departamento
+
+CREATE TABLE pratica06.Vendedor (
+  id SERIAL PRIMARY KEY,
+  id_departamento INT NOT NULL,
+  nome VARCHAR(100) NOT NULL,
+  sobrenome VARCHAR(100) NOT NULL,
+  CONSTRAINT fk_departamento_id FOREIGN KEY (id_departamento) REFERENCES pratica06.Departamento (id)
+);
+
+INSERT INTO pratica06.Vendedor (id_departamento, nome, sobrenome) VALUES
+(1, 'Carlos', 'Lima'),
+(2, 'Fernanda', 'Costa'),
+(3, 'Paula', 'Oliveira'),
+(3, 'Ana', 'Souza');
+
+SELECT * FROM pratica06.vendedor
+
+
+
+CREATE TABLE pratica06.Cliente (
+  id SERIAL PRIMARY KEY,
+  nome VARCHAR(100) NOT NULL,
+  sobrenome VARCHAR(100) NOT NULL
+);
+
+INSERT INTO pratica06.Cliente (nome, sobrenome) VALUES
+('João', 'Silva'),
+('Maria', 'Santos'),
+('Ana', 'Souza'),
+('Carlos', 'Lima'),
+('Paula', 'Oliveira'),
+('Fernanda', 'Costa');
+SELECT * FROM pratica06.cliente
+
+
+
+CREATE TABLE pratica06.Telefone (
+  id SERIAL PRIMARY KEY,
+  id_cliente INT NOT NULL,
+  valor VARCHAR(20) NOT NULL,
+  CONSTRAINT fk_cliente_telefone_id FOREIGN KEY (id_cliente) REFERENCES pratica06.Cliente (id)
+);
+
+INSERT INTO pratica06.Telefone (id_cliente, valor) VALUES
+(1, '85999999999'),
+(2, '11999999999'),
+(3, '21988888888'),
+(4, '85988888888'),
+(5, '31966666666'),
+(6, '41955555555');
+SELECT * FROM pratica06.telefone
+
+
+CREATE TABLE pratica06.Email (
+  id SERIAL PRIMARY KEY,
+  id_cliente INT NOT NULL,
+  valor VARCHAR(30) NOT NULL,
+  CONSTRAINT fk_cliente_email_id FOREIGN KEY (id_cliente) REFERENCES pratica06.Cliente (id)
+);
+
+INSERT INTO pratica06.Email (id_cliente, valor) VALUES
+(1, 'joao@gmail.com'),
+(2, 'maria@hotmail.com'),
+(3, 'ana@outlook.com'),
+(4, 'carlos@gmail.com'),
+(5, 'paula@yahoo.com'),
+(6, 'fernanda@gmail.com');
+SELECT * FROM pratica06.email
+
+
+CREATE TABLE pratica06.Categoria_Produto (
+  id SERIAL PRIMARY KEY,
+  nome VARCHAR(100) NOT NULL
+);
+
+INSERT INTO pratica06.Categoria_Produto (nome) VALUES
+('Eletrônicos'),
+('Eletrodomésticos');
+SELECT * FROM pratica06.categoria_produto
+
+
+CREATE TABLE pratica06.Produto (
+  id SERIAL PRIMARY KEY,
+  nome VARCHAR(50) NOT NULL,
+  valor_unitario NUMERIC(10, 2) NOT NULL,
+  id_categoria INT NOT NULL,
+  CONSTRAINT fk_categoria_id FOREIGN KEY (id_categoria) REFERENCES pratica06.Categoria_Produto (id)
+);
+
+INSERT INTO pratica06.Produto (nome, valor_unitario, id_categoria) VALUES
+('Notebook', 3500.00, 1),
+('Geladeira', 2800.00, 2),
+('Smartphone', 1500.00, 1),
+('Televisão', 2500.00, 1),
+('Fogão', 1200.00, 2),
+('Impressora', 600.00, 1),
+('Liquidificador', 200.00, 2),
+('Fone de Ouvido', 150.00, 1),
+('Tablet', 900.00, 1),
+('Cafeteira', 400.00, 2),
+('Máquina de Lavar', 2200.00, 2),
+('Ar-Condicionado', 1500.00, 2),
+('Drone', 3500.00, 1),
+('Microondas', 800.00, 2);
+
+CREATE TABLE pratica06.Venda (
+  id SERIAL PRIMARY KEY,
+  id_vendedor INT NOT NULL,
+  id_cliente INT NOT NULL,
+  valor_total NUMERIC(10, 2),
+  data_venda DATE NOT NULL,
+  CONSTRAINT fk_vendedor_id FOREIGN KEY (id_vendedor) REFERENCES pratica06.Vendedor (id),
+  CONSTRAINT fk_cliente_id FOREIGN KEY (id_cliente) REFERENCES pratica06.Cliente (id)
+);
+
+INSERT INTO pratica06.Venda (id_vendedor, id_cliente, valor_total, data_venda) VALUES
+(1, 1, 3500.00, '2025-01-15'),
+(2, 2, 2800.00, '2025-01-10'),
+(3, 3, 3000.00, '2025-01-12'),
+(2, 4, 2500.00, '2025-01-11'),
+(1, 5, 2400.00, '2025-01-09'),
+(3, 6, 3200.00, '2025-01-15'),
+(4, 1, 1800.00, '2025-01-16'),
+(4, 2, 800.00, '2025-01-17'),
+(1, 4, 750.00, '2025-01-18'),
+(2, 3, 900.00, '2025-01-14'),
+(4, 6, 800.00, '2025-01-13'),
+(3, 5, 2200.00, '2025-01-15'),
+(4, 1, 3000.00, '2025-01-14'),
+(2, 4, 3500.00, '2025-01-10'),
+(1, 2, 800.00, '2025-01-13');
+
+CREATE TABLE pratica06.Venda_Produto (
+  id SERIAL PRIMARY KEY,
+  id_venda INT NOT NULL,
+  id_produto INT NOT NULL,
+  quantidade INT NOT NULL,
+  CONSTRAINT fk_venda_id FOREIGN KEY (id_venda) REFERENCES pratica06.Venda (id),
+  CONSTRAINT fk_produto_id FOREIGN KEY (id_produto) REFERENCES pratica06.Produto (id)
+);
+
+INSERT INTO pratica06.Venda_Produto (id_venda, id_produto, quantidade) VALUES
+(1, 1, 1),
+(2, 2, 1),
+(3, 3, 2),
+(4, 4, 1),
+(5, 5, 2),
+(6, 1, 1),
+(7, 6, 3),
+(8, 7, 4),
+(9, 8, 5),
+(10, 9, 1),
+(11, 10, 2),
+(12, 11, 1),
+(13, 12, 2),
+(14, 13, 1),
+(15, 14, 1);
+
+-- Tabelas de Endereço
+CREATE TABLE pratica06.Rua (
+  id SERIAL PRIMARY KEY,
+  nome VARCHAR(100) NOT NULL
+);
+
+INSERT INTO pratica06.Rua (nome) VALUES
+('Rua A'),
+('Av. B'),
+('Rua C'),
+('Av. D'),
+('Rua E'),
+('Rua F');
+
+CREATE TABLE pratica06.Bairro (
+  id SERIAL PRIMARY KEY,
+  nome VARCHAR(100) NOT NULL
+);
+
+INSERT INTO pratica06.Bairro (nome) VALUES
+('Bairro 1'),
+('Bairro 2'),
+('Bairro 3'),
+('Bairro 4'),
+('Bairro 5'),
+('Bairro 6');
+
+CREATE TABLE pratica06.Cidade (
+  id SERIAL PRIMARY KEY,
+  nome VARCHAR(100) NOT NULL
+);
+
+INSERT INTO pratica06.Cidade (nome) VALUES
+('Fortaleza'),
+('São Paulo'),
+('Rio de Janeiro'),
+('Curitiba'),
+('Belo Horizonte'),
+('Recife');
+
+CREATE TABLE pratica06.Estado (
+  id SERIAL PRIMARY KEY,
+  uf VARCHAR(2) NOT NULL
+);
+
+INSERT INTO pratica06.Estado (uf) VALUES
+('CE'),
+('SP'),
+('RJ'),
+('PR'),
+('MG'),
+('PE');
+
+CREATE TABLE pratica06.Endereco (
+  id SERIAL PRIMARY KEY,
+  id_cliente INT NOT NULL,
+  id_rua INT NOT NULL,
+  numeracao INT NOT NULL,
+  id_bairro INT NOT NULL,
+  id_cidade INT NOT NULL,
+  id_uf INT NOT NULL,
+  CONSTRAINT fk_cliente_endereco_id FOREIGN KEY (id_cliente) REFERENCES pratica06.Cliente (id),
+  CONSTRAINT fk_rua_endereco_id FOREIGN KEY (id_rua) REFERENCES pratica06.Rua (id),
+  CONSTRAINT fk_bairro_endereco_id FOREIGN KEY (id_bairro) REFERENCES pratica06.Bairro (id),
+  CONSTRAINT fk_cidade_endereco_id FOREIGN KEY (id_cidade) REFERENCES pratica06.Cidade (id),
+  CONSTRAINT fk_uf_endereco_id FOREIGN KEY (id_uf) REFERENCES pratica06.Estado (id)
+);
+
+INSERT INTO pratica06.Endereco (id_cliente, id_rua, numeracao, id_bairro, id_cidade, id_uf) VALUES
+(1, 1, 123, 1, 1, 1),
+(2, 2, 456, 2, 2, 2),
+(3, 3, 789, 3, 3, 3),
+(4, 4, 321, 4, 4, 4),
+(5, 5, 654, 5, 5, 5),
+(6, 6, 987, 6, 6, 6);
