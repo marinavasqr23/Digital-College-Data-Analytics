@@ -72,3 +72,95 @@ INSERT INTO aula07.dependente (nome, data_nasc, id_func, id_parentesco) VALUES
 ('Beatriz Mendes', '2008-04-14', 8, 1),
 ('Ricardo Oliveira', '1992-10-25', 9, 8),
 ('Fernanda Rocha', '2016-03-07', 10, 1);
+
+INSERT INTO aula07.estado (nome) VALUES
+('São Paulo'),
+('Rio de Janeiro'),
+('Minas Gerais'),
+('Bahia'),
+('Paraná'),
+('Rio Grande do Sul'),
+('Pernambuco'),
+('Ceará'),
+('Amazonas'),
+('Distrito Federal');
+
+INSERT INTO aula07.cidade (nome, id_estado) VALUES
+('São Paulo', 1),
+('Rio de Janeiro', 2),
+('Belo Horizonte', 3),
+('Salvador', 4),
+('Curitiba', 5),
+('Porto Alegre', 6),
+('Recife', 7),
+('Fortaleza', 8),
+('Manaus', 9),
+('Brasília', 10);
+
+
+INSERT INTO aula07.bairro (nome, id_cidade) VALUES
+('Centro', 1),
+('Copacabana', 2),
+('Savassi', 3),
+('Pituba', 4),
+('Batel', 5),
+('Moinhos de Vento', 6),
+('Boa Viagem', 7),
+('Aldeota', 8),
+('Adrianópolis', 9),
+('Asa Sul', 10);
+
+
+INSERT INTO aula07.endereco (id_bairro, logradouro, complemento, numero, cep) VALUES
+(1, 'Av. Paulista', 'Apto 101', 1000, 12345678),
+(2, 'Rua Atlântica', NULL, 500, 22070001),
+(3, 'Av. do Contorno', 'Casa', 300, 30110000),
+(4, 'Rua Amazonas', 'Bloco B', 250, 40140000),
+(5, 'Av. Sete de Setembro', NULL, 150, 80240000),
+(6, 'Rua Padre Chagas', 'Sala 101', 200, 90570000),
+(7, 'Av. Boa Viagem', 'Cobertura', 750, 51020000),
+(8, 'Rua Barbosa de Freitas', 'Loja 1', 400, 60170020),
+(9, 'Av. Mário Ypiranga', NULL, 550, 69057000),
+(10, 'SHS Quadra 6', 'Ed. Brasília', 800, 70322900);
+
+
+INSERT INTO aula07.contato (tipo, valor) VALUES
+('email', 'joao@email.com'),
+('telefone', '(11) 99999-1234'),
+('email', 'ana@email.com'),
+('telefone', '(21) 98888-5678'),
+('email', 'maria@email.com'),
+('telefone', '(31) 97777-7890'),
+('email', 'carlos@email.com'),
+('telefone', '(85) 96666-4321'),
+('email', 'juliana@email.com'),
+('telefone', '(92) 95555-8765');
+
+
+INSERT INTO aula07.cliente (nome, id_contato, id_endereco) VALUES
+('Empresa Alpha', 1, 1),
+('Companhia Beta', 2, 2),
+('Negócios Gamma', 3, 3),
+('Tech Delta', 4, 4),
+('Inovações Epsilon', 5, 5),
+('StartUp Zeta', 6, 6),
+('Consultoria Eta', 7, 7),
+('Projetos Theta', 8, 8),
+('Desenvolvimentos Iota', 9, 9),
+('Soluções Kappa', 10, 10);
+
+
+INSERT INTO aula07.projeto (nome, id_depart, id_cliente, id_endereco, data_inicio, data_prazo, valor) VALUES
+('Sistema ERP', 1, 1, 1, '2024-01-10', '2024-12-20', 250000.00),
+('Análise Financeira', 2, 2, 2, '2024-02-15', '2024-11-30', 180000.00),
+('Campanha Publicitária', 3, 3, 3, '2024-03-01', '2024-09-30', 150000.00),
+('Treinamento RH', 4, 4, 4, '2024-04-05', '2024-08-15', 120000.00),
+('Otimização Logística', 5, 5, 5, '2024-05-12', '2024-10-10', 220000.00);
+
+INSERT INTO aula07.beneficio (descricao) VALUES
+('Plano de Saúde'),
+('Vale Refeição'),
+('Vale Transporte'),
+('Seguro de Vida'),
+('Auxílio Educação');
+
