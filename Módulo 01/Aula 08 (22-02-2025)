@@ -1,1 +1,19 @@
 
+INNER JOIN: O INNER JOIN é utilizado quando queremos retornar os registros que tenham correspondência nas duas tabelas presentes na junção. 
+
+** SELECT <select_list> FROM Tabela A INNER JOIN Tabela B ON A.Key = B.Key **
+
+LEFT JOIN: O LEFT JOIN é utilizado quando queremos retornar apenas os registros da tabela da esquerda 
+(tabela que está antes da cláusula LEFT JOIN) e os registros que tenham correspondência na tabela da direita.
+
+** SELECT <select_list> FROM Tabela A LEFT JOIN Tabela B ON A.Key = B.Key **
+
+RIGHT JOIN: O RIGHT JOIN é utilizado quando queremos retornar apenas os registros da tabela da direita
+(tabela que está após a cláusula RIGHT JOIN) e os registros que tenham correspondência na tabela da esquerda.
+
+** SELECT <select_list> FROM Tabela A RIGHT JOIN Tabela B ON A.Key = B.Key  **
+
+FULL JOIN: O FULL JOIN é utilizado quando queremos retornar registros que tenham correspondência em qualquer 
+uma das tabelas presentes na junção.
+
+** SELECT <select_list> FROM Tabela A FULL JOIN Tabela B ON A.Key = B.Key **
