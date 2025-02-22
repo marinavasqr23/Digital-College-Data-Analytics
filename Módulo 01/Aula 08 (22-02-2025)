@@ -17,3 +17,60 @@ FULL JOIN: O FULL JOIN é utilizado quando queremos retornar registros que tenha
 uma das tabelas presentes na junção.
 
 ** SELECT <select_list> FROM Tabela A FULL JOIN Tabela B ON A.Key = B.Key **
+
+
+-----------------------------------------------------------------------------------------------------------------------------
+Aula 08 - Schema Pratica 06:
+SET search_path TO pratica06;
+
+-- Diga o bairro e a numeração dos clientes
+SELECT c.nome AS nome_cliente,
+b.nome AS nome_bairro,
+e.numeracao FROM cliente c
+FULL JOIN endereco e ON c.id=e.id_cliente
+FULL JOIN bairro b ON b.id=e.id_bairro
+;
+
+-- Diga o email e telefone dos clientes
+SELECT c.nome AS nome_cliente,
+em.valor AS email,
+te.valor AS telefone
+FROM cliente c
+FULL JOIN email em ON c.id=em.id_cliente
+FULL JOIN telefone te ON c.id=te.id_cliente;
+
+-- Diga o departamento de cada vendedor
+SELECT v.nome AS nome_vendedor,
+d.nome AS departamento
+FROM vendedor v FULL JOIN departamento d ON v.id_departamento=d.id;
+
+-- Diga o produto que teve uma venda de mais de 3 unidades
+SELECT p.nome AS nome_produto,
+vp.quantidade AS quant_produto
+FROM produto p 
+FULL JOIN venda_produto vp ON p.id=vp.id_produto
+WHERE vp.quantidade > 3;
+
+-- Diga os clientes que pagaram mais de 3.000 R$ em uma compra
+SELECT c.nome AS nome_cliente,
+v.valor_total AS valor_compra
+FROM cliente c FULL JOIN venda v ON c.id=v.id_cliente
+WHERE v.valor_total > 3000;
+
+-- Diga todos os clientes do Ceará e sua cidade
+SELECT c.nome AS nome_cliente,
+ci.nome AS cidade
+FROM cliente c FULL JOIN endereco e ON e.id_cliente=c.id
+FULL JOIN cidade ci ON ci.id=e.id_cidade 
+FULL JOIN estado es ON es.id=e.id_uf
+WHERE es.uf = 'CE';
+
+-- Cite os produtos e suas categorias 
+SELECT p.nome AS produto,
+c.nome AS categoria
+FROM produto p FULL JOIN categoria_produto c ON p.id_categoria=c.id;
+
+
+
+
+
