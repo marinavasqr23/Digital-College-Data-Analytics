@@ -1,0 +1,34 @@
+-- 1. Qual a menor pretensão salarial?
+
+  SELECT MIN(salario) FROM aula07.funcionario 
+
+-- 2. Qual o nome do funcionário que registrou a menor pretensão salarial?
+
+  SELECT nome FROM aula07.funcionario WHERE salario = (SELECT MIN(salario) FROM aula07.funcionario)
+
+-- 3. Quais os funcionários têm pretensão salarial menor ou igual a R$3.500 e não são PCD?
+
+  SELECT nome FROM aula07.funcionario WHERE salario >= 3500 AND pcd='Não'
+
+-- 4. Liste o nome dos funcionários que têm cargo de Programador ou Analista de Infra.
+
+  SELECT f.nome AS nome_funcionario
+  FROM aula07.funcionario f
+  JOIN aula07.cargo c ON f.id_cargo=c.id WHERE c.nome = 'Programador' OR c.nome='Analista de Infra'
+
+-- 5. Liste nome (funcionário e cargo) por departamento que tem pretensão salarial maior que o salário.
+
+
+-- 6. Liste nome (cargo e funcionário) do departamento Administrativo com pretensão salarial e salários.
+
+
+-- 7. ual a soma dos salários por departamento, listando em ordem decrescente?
+
+
+-- 8. Qual a soma dos salários por cargo maiores que R$1.000,00 e listados em ordem decrescente?
+
+
+-- 9. Liste por departamento a soma e a média dos salários por ordem decrescente da soma dos salários.
+
+
+-- 10. Qual o total de registros, a soma, média, máximo e mínimos salários por departamento (nome) dos funcionários ativos e com PCD?
