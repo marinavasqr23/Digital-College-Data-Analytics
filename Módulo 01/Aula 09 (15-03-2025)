@@ -1,34 +1,64 @@
 -- 1. Qual a menor pretensão salarial?
 
-  SELECT MIN(salario) FROM aula07.funcionario 
+SELECT MIN(salario) FROM aula07.funcionario 
 
 -- 2. Qual o nome do funcionário que registrou a menor pretensão salarial?
 
-  SELECT nome FROM aula07.funcionario WHERE salario = (SELECT MIN(salario) FROM aula07.funcionario)
+SELECT nome FROM aula07.funcionario WHERE salario = (SELECT MIN(salario) FROM aula07.funcionario)
 
 -- 3. Quais os funcionários têm pretensão salarial menor ou igual a R$3.500 e não são PCD?
 
-  SELECT nome FROM aula07.funcionario WHERE salario >= 3500 AND pcd='Não'
+SELECT nome FROM aula07.funcionario WHERE salario >= 3500 AND pcd='Não'
 
 -- 4. Liste o nome dos funcionários que têm cargo de Programador ou Analista de Infra.
-
-  SELECT f.nome AS nome_funcionario
-  FROM aula07.funcionario f
-  JOIN aula07.cargo c ON f.id_cargo=c.id WHERE c.nome = 'Programador' OR c.nome='Analista de Infra'
+SELECT f.nome AS nome_funcionario
+FROM aula07.funcionario f
+JOIN aula07.cargo c ON f.id_cargo=c.id WHERE c.nome = 'Programador' OR c.nome='Analista de Infra'
 
 -- 5. Liste nome (funcionário e cargo) por departamento que tem pretensão salarial maior que o salário.
 
+SELECT f.nome AS nome_funcionario, c.nome AS cargo
+FROM aula07.funcionario f 
+FULL JOIN aula07.cargo c ON f.id_cargo=c.id 
+FULL JOIN departamento d ON d.id=c.id_depart ORDER BY departamento WHERE f.salario >  
 
 -- 6. Liste nome (cargo e funcionário) do departamento Administrativo com pretensão salarial e salários.
 
 
--- 7. ual a soma dos salários por departamento, listando em ordem decrescente?
+-- 7. Qual a soma dos salários por departamento, listando em ordem decrescente?
 
+SELECT d.nome AS departamento, SUM(f.salario) AS soma_salario
+FROM aula07.funcionario f 
+LEFT JOIN aula07.cargo c ON f.id_cargo=c.id 
+FULL JOIN departamento d ON d.id=c.id_depart 
+GROUP BY d.nome 
+ORDER BY soma_salario DESC;
 
 -- 8. Qual a soma dos salários por cargo maiores que R$1.000,00 e listados em ordem decrescente?
 
+SELECT c.nome AS cargo, SUM(f.salario) AS soma_salario
+FROM aula07.funcionario f 
+FULL JOIN aula07.cargo c ON f.id_cargo=c.id
+GROUP BY c.nome
+HAVING SUM(f.salario) > 1000
+ORDER BY soma_salario DESC;
 
 -- 9. Liste por departamento a soma e a média dos salários por ordem decrescente da soma dos salários.
 
+SELECT d.nome AS departamento, SUM(f.salario) AS soma_salario, AVG (f.salario) AS media_salario
+FROM aula07.funcionario f 
+LEFT JOIN aula07.cargo c ON f.id_cargo=c.id 
+LEFT JOIN departamento d ON d.id=c.id_depart 
+GROUP BY d.nome 
+ORDER BY soma_salario DESC;
 
 -- 10. Qual o total de registros, a soma, média, máximo e mínimos salários por departamento (nome) dos funcionários ativos e com PCD?
+
+SELECT COUNT (f.nome) AS quant_resgistros, SUM (f.salario) AS soma_salario,
+AVG(f.salario) AS media_salario, MAX(f.salario) AS max_salario, MIN(f.salario) AS min_salario
+FROM aula07.funcionario f 
+LEFT JOIN aula07.cargo c ON f.id_cargo=c.id 
+LEFT JOIN departamento d ON d.id=c.id_depart WHERE pcd='Sim'
+GROUP BY d.nome;
+
+
