@@ -1,1 +1,128 @@
+-- Criar o banco de dados
+CREATE SCHEMA loja;
+
+-- Conectar ao banco de dados
+
+-- Criar tabela de Clientes
+CREATE TABLE loja.cliente (
+    id_cliente SERIAL PRIMARY KEY,
+    nome VARCHAR(100) NOT NULL,
+    email VARCHAR(100) UNIQUE NOT NULL,
+    telefone VARCHAR(20),
+    cidade VARCHAR(50)
+);
+
+-- Criar tabela de Produtos
+CREATE TABLE loja.produto (
+    id_produto SERIAL PRIMARY KEY,
+    nome VARCHAR(100) NOT NULL,
+    preco NUMERIC(10,2) NOT NULL,
+    estoque INT NOT NULL
+);
+
+-- Criar tabela de Vendedores
+CREATE TABLE loja.vendedor (
+    id_vendedor SERIAL PRIMARY KEY,
+    nome VARCHAR(100) NOT NULL,
+    email VARCHAR(100) UNIQUE NOT NULL,
+    comissao NUMERIC(5,2) NOT NULL
+);
+
+-- Criar tabela de Canais de Venda
+CREATE TABLE loja.canal_vendas (
+    id_canal SERIAL PRIMARY KEY,
+    descricao VARCHAR(50) NOT NULL
+);
+
+-- Criar tabela de Vendas
+CREATE TABLE loja.vendas (
+    id_venda SERIAL PRIMARY KEY,
+    id_cliente INT REFERENCES loja.cliente(id_cliente),
+    id_produto INT REFERENCES loja.produto(id_produto),
+    id_vendedor INT REFERENCES loja.vendedor(id_vendedor),
+    id_canal INT REFERENCES loja.canal_vendas(id_canal),
+    quantidade INT NOT NULL,
+    total NUMERIC(10,2) NOT NULL,
+    data_venda TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Inserir dados na tabela cliente
+INSERT INTO loja.cliente (nome, email, telefone, cidade) VALUES
+('João Silva', 'joao@email.com', '11999999999', 'São Paulo'),
+('Maria Oliveira', 'maria@email.com', '21988888888', 'Rio de Janeiro'),
+('Alex Souza', 'aasouzaconsult@gmail.com', '85988888888', 'Fortaleza'),
+('Carlos Souza', 'carlos@email.com', '31977777777', 'Belo Horizonte');
+
+-- Inserir dados na tabela produto
+INSERT INTO loja.produto (nome, preco, estoque) VALUES
+('Notebook Dell', 4500.00, 10),
+('Smartphone Samsung', 2200.00, 20),
+('Mouse Logitech', 150.00, 50);
+
+-- Inserir dados na tabela vendedor
+INSERT INTO loja.vendedor (nome, email, comissao) VALUES
+('Ana Pereira', 'ana@email.com', 5.00),
+('Gabriel Evaristo', 'ge@gmail.com', 10.00),
+('Pedro Almeida', 'pedro@email.com', 7.50);
+
+-- Inserir dados na tabela canal_vendas
+INSERT INTO loja.canal_vendas (descricao) VALUES
+('Loja Física'),
+('E-commerce'),
+('Marketplace');
+
+-- Inserir dados na tabela vendas
+INSERT INTO loja.vendas (id_cliente, id_produto, id_vendedor, id_canal, quantidade, total) VALUES
+(1, 1, 1, 2, 1, 4500.00),
+(2, 2, 2, 3, 2, 4400.00),
+(3, 3, 1, 1, 3, 450.00);
+
+--------------
+-- Questões --
+--------------
+
+-- 1. Liste todos os clientes cadastrados.
+SELECT nome FROM loja.cliente
+
+-- 2. Quais produtos têm mais de 15 unidades em estoque?
+SELECT nome,estoque FROM loja.produto WHERE estoque > 15
+
+-- 3. Quais vendedores estão cadastrados?
+SELECT nome FROM loja.vendedor
+
+-- 4. Liste todas as vendas realizadas.
+SELECT quantidade, total, data_venda FROM loja.vendas
+
+-- 5. Quais clientes são de São Paulo?
+SELECT nome FROM loja.cliente WHERE cidade = 'São Paulo'
+
+-- 6. Quais foram as vendas realizadas no canal de E-commerce?
+SELECT id_venda,data_venda FROM loja.vendas v
+FULL JOIN loja.canal_vendas c ON v.id_canal = c.id_canal 
+WHERE descricao = 'E-commerce'
+
+-- 7. Quais produtos foram vendidos e seus respectivos preços?
+SELECT nome, preco FROM loja.produto
+
+-- 8. Quais vendedores venderam produtos através do canal de Marketplace?
+SELECT ve.nome FROM loja.vendas v
+FULL JOIN loja.canal_vendas c ON v.id_canal = c.id_canal 
+FULL JOIN loja.vendedor ve ON v.id_vendedor = ve.id_vendedor
+WHERE descricao = 'Marketplace'
+
+-- 9. Quantas unidades de cada produto foram vendidas?
+SELECT SUM(quantidade) AS soma,p.nome FROM loja.produto p
+FULL JOIN loja.vendas v ON p.id_produto = v.id_produto
+GROUP BY p.nome 
+ORDER BY soma DESC
+
+-- 10. Qual o total de vendas realizadas por cada vendedor?
+SELECT SUM(id_venda) AS total_vendas, ve.nome FROM loja.vendas v
+LEFT JOIN loja.vendedor ve ON v.id_vendedor= ve.id_vendedor
+GROUP BY ve.nome
+
+
+SELECT v.id_venda, v.data_venda, c.nome
+FROM loja.vendas v 
+LEFT JOIN loja.cliente c ON v.id_cliente=c.id_cliente
 
