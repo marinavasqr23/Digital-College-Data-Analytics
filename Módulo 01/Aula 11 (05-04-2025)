@@ -1,0 +1,9 @@
+------ DATA WAREHOUSE ------
+
+Conjunto de dados agrupados por assunto, integrados, variável em relação ao tempo
+enão volátil, que serve de suporte para o processo de tomada de decisões.
+
+● Orientado a assunto
+Um Data Warehouse está sempre orientado ao redor do principal 
+assunto da organização. Ao contrário de aplicações clássicas, 
+orientadas por processos /funções.
