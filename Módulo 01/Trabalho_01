@@ -1,0 +1,56 @@
+---- FATO EXECUÇÃO FINANCEIRA ----
+CREATE TABLE data_warehouse_01.fato_exec_financeira (
+id INT PRIMARY KEY,
+vlr_empenho NUMERIC (20,2),
+valorpago NUMERIC (20,2),
+cod_ne VARCHAR (50),
+cod_np VARCHAR (50)
+);
+INSERT INTO data_warehouse_01.fato_exec_financeira (id,vlr_empenho,valorpago,cod_ne,cod_np)
+SELECT id,vlr_empenho,valorpago,cod_ne, cod_np FROM public.execucao_financeira;
+SELECT * FROM data_warehouse_01.fato_exec_financeira;
+
+---- DIMENSÃO ORGÃO -----
+CREATE TABLE data_warehouse_01.dim_orgao (
+id_fato INT,
+codigo_orgao VARCHAR(10),
+sigla VARCHAR(20),
+desc_orgao VARCHAR(100),
+CONSTRAINT id_dim_orgao FOREIGN KEY (id_fato) REFERENCES data_warehouse_01.fato_exec_financeira (id)
+);
+INSERT INTO data_warehouse_01.dim_orgao (id_fato, codigo_orgao,sigla,desc_orgao)
+SELECT id, codigo_orgao,sigla,dsc_orgao FROM public.execucao_financeira;
+SELECT * FROM data_warehouse_01.dim_orgao;
+
+---- DIMENSÃO TEMPO -----
+CREATE TABLE data_warehouse_01.dim_tempo (
+id_fato INT,
+num_ano VARCHAR(5),
+dth_empenho DATE,
+dth_pagamento DATE,
+CONSTRAINT id_dim_tempo FOREIGN KEY (id_fato) REFERENCES data_warehouse_01.fato_exec_financeira (id)
+);
+INSERT INTO data_warehouse_01.dim_tempo (id_fato, num_ano, dth_empenho, dth_pagamento)
+SELECT id, num_ano, dth_empenho, dth_pagamento FROM public.execucao_financeira;
+SELECT * FROM data_warehouse_01.dim_tempo
+
+---- DIMENSÃO CATEGORIA -----
+CREATE TABLE data_warehouse_01.dim_categoria(
+id_fato INT,
+dsc_item_categoria VARCHAR (100),
+CONSTRAINT id_dim_categoria FOREIGN KEY (id_fato) REFERENCES data_warehouse_01.fato_exec_financeira (id)
+);
+INSERT INTO data_warehouse_01.dim_categoria (id_fato, dsc_item_categoria)
+SELECT id, dsc_item_categoria FROM public.execucao_financeira;
+SELECT * FROM data_warehouse_01.dim_categoria;
+
+---- DIMENSÃO ELEMENTO -----
+CREATE TABLE data_warehouse_01.dim_elemento(
+id_fato INT,
+dsc_item_elemento VARCHAR (400),
+CONSTRAINT id_dim_elemento FOREIGN KEY (id_fato) REFERENCES data_warehouse_01.fato_exec_financeira (id)
+);
+
+INSERT INTO data_warehouse_01.dim_elemento (id_fato, dsc_item_elemento)
+SELECT id, dsc_item_elemento FROM public.execucao_financeira;
+SELECT * FROM data_warehouse_01.dim_elemento
